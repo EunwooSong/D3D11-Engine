@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -146,6 +146,11 @@
     <ClCompile Include="AlignedAllocationPolicy.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="D3D11Graphic.cpp" />
+    <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ShaderManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WinMain.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
@@ -153,7 +158,13 @@
     <ClInclude Include="AlignedAllocationPolicy.h" />
     <ClInclude Include="Application.h" />
     <ClInclude Include="D3D11Graphic.h" />
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Math.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "Math.h"
 
 //Define
 #define WINDOW_WIDTH 1280
@@ -7,23 +8,44 @@
 #define USE_CONSOLE true
 #define PROGRAM_NAME TEXT("D3D11_Engine")
 #define CONSOLE_NAME TEXT("D3D11_Console")
+#define BACKGROUND_COLOR Color(0,0,0,0).getColorArray()
 
 //Initialize D3D11Class, ConsoleClass
-#define ENGINE_APP Application::Instance()
+#define D3D11_APP Application::Instance()
 
 class D3D11Graphic;
+class InputManager;
 
 class Application
 {
 private:
-	LARGE_INTEGER beforeInterval, currentInterval, Frequency;
+	LARGE_INTEGER beforeInterval, currentInterval, frequency;
+	D3D11Graphic* d3d11Graphic;
+	HWND hWnd;
 
 	Application();
 	~Application();
+
+	void Update(float dt);
+	void Render();
 public:
 	static Application* Instance();
+	
+	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+	HWND FloatWindow(HINSTANCE hInstance, int cmdShow);
 
 	void InitWindow(HINSTANCE hInstance);
-	void InitD3D11();
-};
+	void InitD3D11(HWND hWnd);
+	void InitDeltaTime();
 
+	void ReleseD3D11();
+	void DeleteManager();
+
+	int DoMainLoop(Scene* firstScene);
+	float getDeltaTime();
+
+	//Get HWND, D3D11Device
+	HWND GetHwnd() const;
+	ID3D11Device* GetD3D11Device() const;
+	ID3D11DeviceContext* GetD3D11DeviceContext() const;
+};

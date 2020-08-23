@@ -1,9 +1,15 @@
 #include "stdafx.h"
 #include "Application.h"
+#include "Console.h"
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-	_In_opt_ HINSTANCE hPrevInstance,
-	_In_ LPWSTR lpCmdLine,
-	_In_ int nCmdShow) {
-	Application* app = new Application();
+INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR, INT cmdShow) {
+	srand(GetTickCount());
+
+	Console console;
+
+	if (USE_CONSOLE)
+		console.OpenConsole();
+
+	D3D11_APP->InitWindow(hInstance);
+	D3D11_APP->InitD3D11();
 }
