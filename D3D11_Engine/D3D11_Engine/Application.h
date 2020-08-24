@@ -4,7 +4,7 @@
 
 //Define
 #define WINDOW_WIDTH 1280
-#define WINDOW_HIEGHT 720
+#define WINDOW_HEIGHT 720
 #define USE_CONSOLE true
 #define PROGRAM_NAME TEXT("D3D11_Engine")
 #define CONSOLE_NAME TEXT("D3D11_Console")
@@ -15,12 +15,15 @@
 
 class D3D11Graphic;
 class InputManager;
+class SceneManager;
 
 class Application
 {
 private:
 	LARGE_INTEGER beforeInterval, currentInterval, frequency;
 	D3D11Graphic* d3d11Graphic;
+	InputManager* inputManager;
+	SceneManager* sceneManager;
 	HWND hWnd;
 
 	Application();
@@ -35,7 +38,7 @@ public:
 	HWND FloatWindow(HINSTANCE hInstance, int cmdShow);
 
 	void InitWindow(HINSTANCE hInstance);
-	void InitD3D11(HWND hWnd);
+	bool InitD3D11(HWND hWnd);
 	void InitDeltaTime();
 
 	void ReleseD3D11();
@@ -48,4 +51,7 @@ public:
 	HWND GetHwnd() const;
 	ID3D11Device* GetD3D11Device() const;
 	ID3D11DeviceContext* GetD3D11DeviceContext() const;
+
+	//Get System Managers
+	InputManager* GetInputManager() const;
 };

@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="AlignedAllocationPolicy.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3D11Graphic.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="AlignedAllocationPolicy.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="D3D11Graphic.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Math.h" />

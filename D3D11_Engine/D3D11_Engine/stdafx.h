@@ -33,6 +33,7 @@
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <directxmath.h>
+#include "Math.h"
 
 //Linking D3D11
 #pragma comment(lib, "d3d11.lib")

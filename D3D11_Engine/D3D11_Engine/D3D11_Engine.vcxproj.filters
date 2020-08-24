@@ -16,34 +16,52 @@
     <Filter Include="소스 파일\Core">
       <UniqueIdentifier>{2c8c65a2-ceff-42f2-a0c1-2d2f657382be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Core\Application">
-      <UniqueIdentifier>{b48e6ee1-bb52-4c3f-a685-d144ffbf38b0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\Core\AlignedAllocationPolicy">
-      <UniqueIdentifier>{79723900-47d5-4358-bf61-16f290ee63f1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\SystemManager">
       <UniqueIdentifier>{5ceeac17-fdc0-4f2d-81ca-102d0ecbd837}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Core\D3D11Graphic">
-      <UniqueIdentifier>{e2a93781-5374-43c8-930d-65933990d6f0}</UniqueIdentifier>
+    <Filter Include="소스 파일\Core\D3D11">
+      <UniqueIdentifier>{b4ba751b-08e2-4565-a0a1-44279e254f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Core\Console">
+      <UniqueIdentifier>{6216930c-1058-4ba2-93bf-9c8531e5e449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Core\Math">
+      <UniqueIdentifier>{531ee43f-fed6-4cd1-98bc-5d3ef14c3e47}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="AlignedAllocationPolicy.cpp">
-      <Filter>소스 파일\Core\AlignedAllocationPolicy</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>소스 파일\Core\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="D3D11Graphic.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderManager.cpp">
+      <Filter>소스 파일\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>소스 파일\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>소스 파일\SystemManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="AlignedAllocationPolicy.cpp">
+      <Filter>소스 파일\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D11Graphic.cpp">
+      <Filter>소스 파일\Core\D3D11</Filter>
+    </ClCompile>
+    <ClCompile Include="Console.cpp">
+      <Filter>소스 파일\Core\Console</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,8 +74,29 @@
     <ClInclude Include="Application.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
     <ClInclude Include="D3D11Graphic.h">
-      <Filter>소스 파일\Core\D3D11Graphic</Filter>
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>소스 파일\Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

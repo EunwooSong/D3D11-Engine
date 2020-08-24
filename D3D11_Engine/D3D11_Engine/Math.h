@@ -126,8 +126,12 @@ public:
 	bool operator == (const Color& rhs) {
 		return a == rhs.a && r == rhs.r && g == rhs.g && b == rhs.b;
 	}
-	float* getColorArray() {
+	float* getColor_ARGB() {
 		float tmp[] = { a, r, g, b };
+		return tmp;
+	}
+	float* getColor_RGBA() {
+		float tmp[] = { r, g, b, a };
 		return tmp;
 	}
 };

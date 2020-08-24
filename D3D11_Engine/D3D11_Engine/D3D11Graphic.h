@@ -18,18 +18,18 @@ private:
 	ID3D11DepthStencilState* pdepthStencilState = nullptr;
 	ID3D11DepthStencilView* pdepthStencilView = nullptr;
 	ID3D11RasterizerState* prasterState = nullptr;
-	XMMATRIX projectionMatrix;
-	XMMATRIX worldMatrix;
-	XMMATRIX orthoMatrix;
+	XMMATRIX m_projectionMatrix;
+	XMMATRIX m_worldMatrix;
+	XMMATRIX m_orthoMatrix;
 
 public:
 	D3D11Graphic();
 	~D3D11Graphic();
 
 	bool Initialize(int, int, bool, HWND, bool, float, float);
-	void Shutdown();
+	void Dispose();
 
-	void BeginScene(float, float, float, float);
+	void BeginScene(Color);
 	void EndScene();
 
 	ID3D11Device* GetD3D11Device();
