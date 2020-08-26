@@ -28,6 +28,12 @@
     <Filter Include="소스 파일\Core\Math">
       <UniqueIdentifier>{531ee43f-fed6-4cd1-98bc-5d3ef14c3e47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Core\Entity">
+      <UniqueIdentifier>{9f4fcf91-008c-4d1b-b43d-80cbc38540fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Core\Scene">
+      <UniqueIdentifier>{8d22998c-46ca-4b15-bea6-dc862df2fdc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="Console.cpp">
       <Filter>소스 파일\Core\Console</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\Core\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -96,6 +105,9 @@
       <Filter>소스 파일\Core\Math</Filter>
     </ClInclude>
     <ClInclude Include="Console.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

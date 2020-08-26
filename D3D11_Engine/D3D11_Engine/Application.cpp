@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Application.h"
 #include "D3D11Graphic.h"
+#include "SceneManager.h"
+#include "InputManager.h"
+#include "Scene.h"
 
 Application::Application()
 {
@@ -21,7 +24,7 @@ void Application::Update(float dt)
 
 void Application::Render()
 {
-	d3d11Graphic->BeginScene(0.5f, 0.5f, 0.5f, 1.0f);
+	d3d11Graphic->BeginScene(Color(1.0f, 0.5f, 0.5f, 0.5f));
 
 	//if(currentScene)
 	//	currentScene->Render();
@@ -48,13 +51,32 @@ LRESULT Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPa
 
 HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 {
-	hWnd = CreateWindow(
+	POINT center;
+
+	if (FULL_SCREEN) {
+		DEVMODE dmScreenSettings;
+		memset(&dmScreenSettings, 0, sizeof(dmScreenSettings));
+		dmScreenSettings.dmSize = sizeof(dmScreenSettings);
+		dmScreenSettings.dmPelsWidth = (unsigned long)WINDOW_WIDTH;
+		dmScreenSettings.dmPelsHeight = (unsigned long)WINDOW_HEIGHT;
+		dmScreenSettings.dmBitsPerPel = 32;
+		dmScreenSettings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
+
+		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
+	}
+	else {
+		center.x = (GetSystemMetrics(SM_CXSCREEN) - WINDOW_WIDTH) / 2;
+		center.y = (GetSystemMetrics(SM_CXSCREEN) - WINDOW_HEIGHT) / 2;
+	}
+
+	hWnd = CreateWindowEx(
+		WS_EX_APPWINDOW,
 		PROGRAM_NAME,
 		PROGRAM_NAME,
-		WS_SYSMENU, //<- 창모드
-		//WS_EX_TOPMOST | WS_POPUP, // <- 전체화면
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
+		//WS_SYSMENU, //<- 창모드
+		WS_CLIPSIBLINGS | WS_EX_TOPMOST | WS_POPUP, // <- 전체화면
+		center.x,
+		center.y,
 		WINDOW_WIDTH,
 		WINDOW_HEIGHT,
 		NULL,
@@ -64,6 +86,9 @@ HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 	);
 
 	ShowWindow(hWnd, cmdShow);
+	SetForegroundWindow(hWnd);
+	SetFocus(hWnd);
+
 	return hWnd;
 }
 
@@ -95,7 +120,7 @@ bool Application::InitD3D11(HWND hWnd)
 		FULL_SCREEN,
 		SCREEN_DEPTH,
 		SCREEN_NEAR)) {
-		MessageBox(hWnd, L"Could not initialize D3D11.", L"ERROR", MB_OK);
+		MessageBox(hWnd, L"Could not Initialize D3D11.", L"ERROR", MB_OK);
 		return false;
 	}
 
@@ -117,30 +142,38 @@ void Application::ReleseD3D11()
 	}
 }
 
+void Application::InitializeManager()
+{
+	inputManager = new InputManager();
+	sceneManager = new SceneManager();
+}
+
 void Application::DeleteManager()
 {
 	SAFE_DELETE(d3d11Graphic);
+	SAFE_DELETE(inputManager);
+	SAFE_DELETE(sceneManager);
 	//SAFE_DELETE();
 }
 
 int Application::DoMainLoop(Scene* firstScene)
 {
-	return 0; 
+	InitDeltaTime();
+
+	sceneManager->ChangeScene(firstScene);
+
+
 }
 
 float Application::getDeltaTime()
 {
-	//Get Current Time
 	QueryPerformanceCounter(&currentInterval);
 	LONGLONG interval = (currentInterval.QuadPart - beforeInterval.QuadPart);
 
-	//Get DeltaTime
 	float dt = (float)interval / (float)frequency.QuadPart;
 
-	//Set BeforeTime
 	beforeInterval = currentInterval;
 
-	//Return DeltaTime
 	return dt;
 }
 
@@ -157,4 +190,14 @@ ID3D11Device* Application::GetD3D11Device() const
 ID3D11DeviceContext* Application::GetD3D11DeviceContext() const
 {
 	return d3d11Graphic->GetDeviceContext();
+}
+
+InputManager* Application::GetInputManager() const
+{
+	return inputManager;
+}
+
+SceneManager* Application::GetSceneManager() const
+{
+	return sceneManager;
 }

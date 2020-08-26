@@ -148,6 +148,7 @@
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="D3D11Graphic.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ShaderManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="D3D11Graphic.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Math.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShaderManager.h" />
     <ClInclude Include="SoundManager.h" />

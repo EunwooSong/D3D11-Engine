@@ -17,13 +17,18 @@ class D3D11Graphic;
 class InputManager;
 class SceneManager;
 
+class Scene;
+
 class Application
 {
 private:
 	LARGE_INTEGER beforeInterval, currentInterval, frequency;
+	//D3D11 Core
 	D3D11Graphic* d3d11Graphic;
+	//System Manager
 	InputManager* inputManager;
 	SceneManager* sceneManager;
+	HINSTANCE hInstance;
 	HWND hWnd;
 
 	Application();
@@ -42,6 +47,7 @@ public:
 	void InitDeltaTime();
 
 	void ReleseD3D11();
+	void InitializeManager();
 	void DeleteManager();
 
 	int DoMainLoop(Scene* firstScene);
@@ -54,4 +60,5 @@ public:
 
 	//Get System Managers
 	InputManager* GetInputManager() const;
+	SceneManager* GetSceneManager() const;
 };

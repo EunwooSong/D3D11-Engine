@@ -11,5 +11,5 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR, INT cmdS
 		console.OpenConsole();
 
 	D3D11_APP->InitWindow(hInstance);
-	D3D11_APP->InitD3D11();
+	D3D11_APP->InitD3D11(D3D11_APP->FloatWindow(hInstance, cmdShow));
 }

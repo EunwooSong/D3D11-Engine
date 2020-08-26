@@ -122,6 +122,7 @@ private:
 
 public:
 	Color() { a = 0; r = 0; g = 0; b = 0; };
+	Color(float a, float r, float g, float b) : a(a), r(r), g(g), b(b) {};
 	Color(const Color&);
 	bool operator == (const Color& rhs) {
 		return a == rhs.a && r == rhs.r && g == rhs.g && b == rhs.b;
