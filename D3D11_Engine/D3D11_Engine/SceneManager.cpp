@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SceneManager.h"
 
-SceneManager::SceneManager()
+SceneManager::SceneManager() : currentScene(nullptr)
 {
 }
 
@@ -16,7 +16,6 @@ void SceneManager::Render()
 
 void SceneManager::Update(float dt)
 {
-
 }
 
 void SceneManager::ChangeScene(Scene* iter)

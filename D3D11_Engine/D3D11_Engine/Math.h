@@ -1,10 +1,18 @@
 #pragma once
-#include "stdafx.h"
+#include <random>
+
+using namespace std;
 
 //-----------------------------------------------
-// VECTOR 2
+// Math Values
 //-----------------------------------------------
-typedef struct Vector2 : XMFLOAT2 {
+#define PI 3.141592654f
+
+typedef struct Vector2 {
+public:
+	float x;
+	float y;
+
 public:
 	explicit Vector2() { x = 0; y = 0; };
 	explicit Vector2(float _x, float _y) { x = _x; y = _y; };
@@ -37,7 +45,7 @@ public:
 	}
 
 	float polar() const {
-		return fmod(atan2(y, x) + 2 * XM_PI, 2 * XM_PI);
+		return fmod(atan2(y, x) + 2 * PI, 2 * PI);
 	}
 	
 	float dot(const Vector2& rhs) const {
@@ -57,7 +65,7 @@ public:
 //-----------------------------------------------
 // Rect 2D
 //-----------------------------------------------
-typedef struct Rect : RECT {
+class Rect : public RECT {
 public:
 	Rect() { left = 0; right = 0; top = 0; bottom = 0; };
 
@@ -141,18 +149,18 @@ public:
 //-----------------------------------------------
 // Functions
 //-----------------------------------------------
-inline double Interval(Vector2 a, Vector2 b) {
+inline double Interval(Vec2 a, Vec2 b) {
 	return acos(a.dot(b) / a.norm() * b.norm());
 }
 
 inline float random(float min, float max) {
-	static default_random_engine random(timeGetTime());
+	static default_random_engine random((float)timeGetTime());
 	uniform_real_distribution<float> d(min, max);
 	return d(random);
 }
 
 inline int random(int min, int max) {
-	static default_random_engine random(timeGetTime());
+	static default_random_engine random((float)timeGetTime());
 	uniform_int_distribution<int> d(min, max);
 	return d(random);
 }
@@ -171,6 +179,11 @@ inline T Clamp(T v1, T max, T min) {
 
 template <class T>
 inline T Lerp(T start, T end, float v) {
-	v = clamp(v, 1.0f);
+	v = Clamp(v, 1.0f);
 	return start + (end - start) * v;
+}
+
+inline float angle(const Vec2 p1, const Vec2 p2) {
+	Vec2 p = p1 - p2;
+	return atan2(p.x, p.y);
 }

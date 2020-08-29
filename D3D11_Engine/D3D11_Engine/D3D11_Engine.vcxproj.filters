@@ -28,11 +28,17 @@
     <Filter Include="소스 파일\Core\Math">
       <UniqueIdentifier>{531ee43f-fed6-4cd1-98bc-5d3ef14c3e47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Core\Entity">
-      <UniqueIdentifier>{9f4fcf91-008c-4d1b-b43d-80cbc38540fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Core\Scene">
       <UniqueIdentifier>{8d22998c-46ca-4b15-bea6-dc862df2fdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObject">
+      <UniqueIdentifier>{9f4fcf91-008c-4d1b-b43d-80cbc38540fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObject\Scene">
+      <UniqueIdentifier>{7beda07f-3e5b-4574-abd5-f783dc7c5d5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\GameObject\Sprite">
+      <UniqueIdentifier>{55b51355-2be6-49df-a644-b090252d193e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

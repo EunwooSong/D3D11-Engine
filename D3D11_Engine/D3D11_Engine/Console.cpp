@@ -13,5 +13,5 @@ void Console::OpenConsole() {
 	AllocConsole();
 
 	freopen_s(&fp, "CONOUT$", "w", stdout);
-	SetConsoleTitle();
+	SetConsoleTitle(CONSOLE_NAME);
 }

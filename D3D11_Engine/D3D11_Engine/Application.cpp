@@ -5,6 +5,9 @@
 #include "InputManager.h"
 #include "Scene.h"
 
+//------------------------------------------------------------------------
+// Priavate
+//------------------------------------------------------------------------
 Application::Application()
 {
 	QueryPerformanceCounter(&beforeInterval);
@@ -16,22 +19,36 @@ Application::~Application()
 {
 }
 
-void Application::Update(float dt)
+float Application::getDeltaTime()
 {
+	QueryPerformanceCounter(&currentInterval);
+	LONGLONG interval = (currentInterval.QuadPart - beforeInterval.QuadPart);
 
+	float dt = (float)interval / (float)frequency.QuadPart;
 
+	beforeInterval = currentInterval;
+
+	return dt;
 }
 
 void Application::Render()
 {
 	d3d11Graphic->BeginScene(Color(1.0f, 0.5f, 0.5f, 0.5f));
 
-	//if(currentScene)
-	//	currentScene->Render();
+	sceneManager->Render();
 
 	d3d11Graphic->EndScene();
 }
 
+void Application::Update()
+{
+	inputManager->UpdateKeyState();
+	sceneManager->Update(getDeltaTime());
+}
+
+//------------------------------------------------------------------------
+// Public
+//------------------------------------------------------------------------
 Application* Application::Instance()
 {
 	static Application* tmp = new Application();
@@ -51,7 +68,7 @@ LRESULT Application::WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPa
 
 HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 {
-	POINT center;
+	POINT center = {0, };
 
 	if (FULL_SCREEN) {
 		DEVMODE dmScreenSettings;
@@ -65,6 +82,7 @@ HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
 	}
 	else {
+		//Set Window Pos Center
 		center.x = (GetSystemMetrics(SM_CXSCREEN) - WINDOW_WIDTH) / 2;
 		center.y = (GetSystemMetrics(SM_CXSCREEN) - WINDOW_HEIGHT) / 2;
 	}
@@ -73,9 +91,10 @@ HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 		WS_EX_APPWINDOW,
 		PROGRAM_NAME,
 		PROGRAM_NAME,
-		//WS_SYSMENU, //<- 창모드
-		WS_CLIPSIBLINGS | WS_EX_TOPMOST | WS_POPUP, // <- 전체화면
-		center.x,
+		(!FULL_SCREEN) ?
+		WS_SYSMENU :								//System Mode : Window
+		WS_CLIPSIBLINGS | WS_EX_TOPMOST | WS_POPUP, //System Mode : Full Screen
+		center.x,									//Set System Window Pos
 		center.y,
 		WINDOW_WIDTH,
 		WINDOW_HEIGHT,
@@ -92,7 +111,7 @@ HWND Application::FloatWindow(HINSTANCE hInstance, int cmdShow)
 	return hWnd;
 }
 
-void Application::InitWindow(HINSTANCE hInstance)
+void Application::InitializeWindow(HINSTANCE hInstance)
 {
 	WNDCLASS wndClass;
 
@@ -109,11 +128,12 @@ void Application::InitWindow(HINSTANCE hInstance)
 	RegisterClass(&wndClass);
 }
 
-bool Application::InitD3D11(HWND hWnd)
+bool Application::InitializeD3D11(HWND hWnd)
 {
 	d3d11Graphic = (D3D11Graphic*)_aligned_malloc(sizeof(D3D11Graphic), 16);
 
-	if (!d3d11Graphic->Initialize(WINDOW_WIDTH,
+	if (!d3d11Graphic->Initialize(
+		WINDOW_WIDTH,
 		WINDOW_HEIGHT,
 		VSYNC_ENABLE,
 		hWnd,
@@ -133,7 +153,7 @@ void Application::InitDeltaTime()
 	QueryPerformanceFrequency(&frequency);
 }
 
-void Application::ReleseD3D11()
+void Application::ReleaseD3D11()
 {
 	if (d3d11Graphic) {
 		d3d11Graphic->Dispose();
@@ -162,19 +182,25 @@ int Application::DoMainLoop(Scene* firstScene)
 
 	sceneManager->ChangeScene(firstScene);
 
+	MSG Mes;
+	ZeroMemory(&Mes, sizeof(Mes));
 
-}
+	while (Mes.message != WM_QUIT) {
+		if (PeekMessage(&Mes, NULL, 0, 0, PM_REMOVE)) {
+			TranslateMessage(&Mes);
+			DispatchMessage(&Mes); 
+		}
 
-float Application::getDeltaTime()
-{
-	QueryPerformanceCounter(&currentInterval);
-	LONGLONG interval = (currentInterval.QuadPart - beforeInterval.QuadPart);
+		//Render Objects
+		Render();
+		//Update Objects
+		Update();
+	}
 
-	float dt = (float)interval / (float)frequency.QuadPart;
+	DeleteManager();
+	ReleaseD3D11();
 
-	beforeInterval = currentInterval;
-
-	return dt;
+	return (int)Mes.wParam;
 }
 
 HWND Application::GetHwnd() const

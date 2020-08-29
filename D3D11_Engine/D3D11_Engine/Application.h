@@ -23,8 +23,10 @@ class Application
 {
 private:
 	LARGE_INTEGER beforeInterval, currentInterval, frequency;
+	
 	//D3D11 Core
 	D3D11Graphic* d3d11Graphic;
+
 	//System Manager
 	InputManager* inputManager;
 	SceneManager* sceneManager;
@@ -34,24 +36,24 @@ private:
 	Application();
 	~Application();
 
-	void Update(float dt);
+	float getDeltaTime();
 	void Render();
+	void Update();
 public:
 	static Application* Instance();
 	
 	static LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 	HWND FloatWindow(HINSTANCE hInstance, int cmdShow);
 
-	void InitWindow(HINSTANCE hInstance);
-	bool InitD3D11(HWND hWnd);
+	void InitializeWindow(HINSTANCE hInstance);
+	bool InitializeD3D11(HWND hWnd);
 	void InitDeltaTime();
 
-	void ReleseD3D11();
+	void ReleaseD3D11();
 	void InitializeManager();
 	void DeleteManager();
 
 	int DoMainLoop(Scene* firstScene);
-	float getDeltaTime();
 
 	//Get HWND, D3D11Device
 	HWND GetHwnd() const;
